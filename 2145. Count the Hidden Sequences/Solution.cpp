@@ -10,7 +10,6 @@ public:
             dLo = min(dLo, prefix);
             dUp = max(dUp, prefix);
         }
-        cout<<"dLo: "<<dLo<<", dUp: "<<dUp<<"\n";
         int calGap = dUp - dLo;
 
         if(gap < calGap) return 0;
