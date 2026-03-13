@@ -20,7 +20,6 @@ private:
 public:
     long long minNumberOfSeconds(int mountainHeight, vector<int>& workerTimes) 
     {
-        sort(workerTimes.begin(), workerTimes.end());
         LL maxmal = 1LL * mountainHeight * (*max_element(workerTimes.begin(), workerTimes.end()));
         LL lo = 1, hi = maxmal >= sqrt(LLONG_MAX) ? LLONG_MAX : 1LL * maxmal * (maxmal + 1) / 2;
         while(lo < hi)
