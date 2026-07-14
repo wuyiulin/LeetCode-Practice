@@ -1,0 +1,24 @@
+class Solution {
+private:
+    static constexpr int MOD = 1e9 + 7;
+    int helper(const vector<int>& nums, int i, int x, int y, vector<vector<vector<int>>>& mem)
+    {
+        if(i == nums.size())
+            return x > 0 && x == y;
+        if(mem[i][x][y] != -1)
+            return mem[i][x][y];
+
+        const int skip = helper(nums, i + 1, x, y, mem);
+        const int take1 = helper(nums, i + 1, gcd(x, nums[i]), y, mem);
+        const int take2 = helper(nums, i + 1, x, gcd(y, nums[i]), mem);
+
+        return mem[i][x][y] = (static_cast<long>(skip) + take1 + take2) % MOD;
+    }
+public:
+    int subsequencePairCount(vector<int>& nums) {
+        int maxNum = *max_element(nums.begin(), nums.end()), n = nums.size();
+        vector<vector<vector<int>>> mem(n, vector<vector<int>>(maxNum + 1, vector<int>(maxNum + 1, -1)));
+
+        return helper(nums, 0, 0, 0, mem);
+    }
+};
